@@ -6,4 +6,4 @@ This repo contains tools useful for local development.  Each folder contains a d
 Logging pipeline based on Elasticsearch, FluentD, Kibana.
 
 ## mailhog
-Mailserver for testing sending emails locally.
+Mail server for testing sending emails locally.
