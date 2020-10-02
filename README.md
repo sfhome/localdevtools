@@ -7,3 +7,6 @@ Logging pipeline based on Elasticsearch, FluentD, Kibana.
 
 ## mailhog
 Mail server for testing sending emails locally.
+
+## postgres
+Postgres database server
