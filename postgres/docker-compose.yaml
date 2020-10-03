@@ -1,9 +1,30 @@
 version: '3.6'
 services:
-  db:
-    image: postgres:11.9  # versions supported by AWS: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+
+  # Postgres database server
+  postgres:
+    # Postgres versions supported by major cloud providers:
+    # - AWS: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+    # - Azure: https://docs.microsoft.com/en-us/azure/postgresql/concepts-supported-versions
+    # - GCloud: https://cloud.google.com/sql/docs/postgres/db-versions
+    image: postgres:11.9
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+  
+  # UI for managing the Postgres server
+  pgadmin:
+    image: dpage/pgadmin4:4.26
+    ports:
+      - "6432:80"
+    environment:
+      # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
+      PGADMIN_DEFAULT_EMAIL: admin@example.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_SERVER_JSON_FILE: /app/servers.json
+    volumes:
+      - ./pgadmin4/servers.json:/app/servers.json  # https://www.pgadmin.org/docs/pgadmin4/development/import_export_servers.html#json-format
+    logging:
+      driver: none  # set to "none" to silence pgadmin log spew, set to "json-file" if debugging is needed
