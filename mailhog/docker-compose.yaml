@@ -5,5 +5,5 @@ services:
     environment:  # https://github.com/mailhog/MailHog/blob/master/docs/CONFIG.md
       - MH_HOSTNAME=host.docker.internal
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
