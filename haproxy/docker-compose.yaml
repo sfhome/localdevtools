@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  haproxy:
+    image: haproxy:2.3.5-alpine
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+    ports:
+      - "9000:80"
+
+  webapp1a:
+    build: ./webapp
+    environment:
+      APPNAME: webapp1a
+
+  webapp2a:
+    build: ./webapp
+    environment:
+      APPNAME: webapp2a
